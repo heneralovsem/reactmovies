@@ -1,0 +1,25 @@
+.details__wrapper {
+    width: 80%;
+    background-color: peachpuff;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.details__info {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.details__description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+.details__plot__wrapper {
+    padding-top: 80px;
+}
+.details__plot {
+    font-size: 18px;
+}

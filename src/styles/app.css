@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.search {
+    padding-bottom: 40px;
+}
+.pagebtn {
+    width: 40px;
+    padding: 5px;
+}
+.pagebtn__active {
+    border: 2px solid burlywood;
+}
