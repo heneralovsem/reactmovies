@@ -18,7 +18,7 @@ const MoviesList = () => {
     const lastElement = useRef()
     const observer = useRef();
     const [fetchMovies, isLoading, error] = useFetching(async (testPage, testSearch) => {
-        testPage = page;
+        
         console.log(testSearch)
         console.log(testPage)
         if (title.length < 3) {
@@ -26,6 +26,7 @@ const MoviesList = () => {
             setData(response.data)
             console.log(response.data)
             setCheckSearch('title')
+            setTotalPages(0)
             
         }
         else {
@@ -62,9 +63,9 @@ const MoviesList = () => {
                 
                 console.log(page)
                 setPage(page + 1)
-            
+            testPage = page;
             testSearch = false;
-            fetchMovies(page, testSearch)
+            fetchMovies(testPage, testSearch)
             }
         };
         observer.current = new IntersectionObserver(callback);
@@ -77,10 +78,10 @@ const MoviesList = () => {
     // }
     const newFetch = () => {
         testSearch = true;
+        
         setPage(1)
-        
-        
-        fetchMovies(page, testSearch)
+        testPage = 1;
+        fetchMovies(testPage, testSearch)
         
     }
     
