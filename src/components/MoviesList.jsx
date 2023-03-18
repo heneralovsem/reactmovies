@@ -10,17 +10,16 @@ const MoviesList = () => {
     const [totalPages, setTotalPages] = useState(0) 
     const [page, setPage] = useState(1)
     const [checkSearch, setCheckSearch] = useState('search');
-    const [newSearch, setNewSearch] = useState(false);
     const perPage = 10;
-    let testSearch;
-    let testPage;
+    let newSearch;
+    let pageValue;
     let pagesArr = getPagesArr(totalPages)
     const lastElement = useRef()
     const observer = useRef();
-    const [fetchMovies, isLoading, error] = useFetching(async (testPage, testSearch) => {
+    const [fetchMovies, isLoading, error] = useFetching(async (pageValue, newSearch) => {
         
-        console.log(testSearch)
-        console.log(testPage)
+       
+        console.log(pageValue)
         if (title.length < 3) {
             const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&t=${title}`)
             setData(response.data)
@@ -30,14 +29,14 @@ const MoviesList = () => {
             
         }
         else {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&s=${title}&page=${testPage}`)
-        if (testSearch) {
+        const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&s=${title}&page=${pageValue}`)
+        if (newSearch) {
             setData(response.data.Search)
                 console.log('yep')
             
         }
         else {
-            if (testPage === 1 && testSearch === false) {
+            if (pageValue === 1 && newSearch === false) {
             setData(response.data.Search)
             console.log('YEP')
             
@@ -63,9 +62,9 @@ const MoviesList = () => {
                 
                 console.log(page)
                 setPage(page + 1)
-            testPage = page;
-            testSearch = false;
-            fetchMovies(testPage, testSearch)
+            pageValue = page;
+            newSearch = false;
+            fetchMovies(pageValue, newSearch)
             }
         };
         observer.current = new IntersectionObserver(callback);
@@ -77,11 +76,11 @@ const MoviesList = () => {
     //     fetchMovies(page)
     // }
     const newFetch = () => {
-        testSearch = true;
+        newSearch = true;
         
         setPage(1)
-        testPage = 1;
-        fetchMovies(testPage, testSearch)
+        pageValue = 1;
+        fetchMovies(pageValue, newSearch)
         
     }
     
