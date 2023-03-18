@@ -12,11 +12,15 @@ const MoviesList = () => {
     const [checkSearch, setCheckSearch] = useState('search');
     const [newSearch, setNewSearch] = useState(false);
     const perPage = 10;
+    let testSearch;
+    let testPage;
     let pagesArr = getPagesArr(totalPages)
     const lastElement = useRef()
     const observer = useRef();
-    const [fetchMovies, isLoading, error] = useFetching(async (page) => {
-        console.log(newSearch)
+    const [fetchMovies, isLoading, error] = useFetching(async (testPage, testSearch) => {
+        testPage = page;
+        console.log(testSearch)
+        console.log(testPage)
         if (title.length < 3) {
             const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&t=${title}`)
             setData(response.data)
@@ -25,14 +29,22 @@ const MoviesList = () => {
             
         }
         else {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&s=${title}&page=${page}`)
-        if (newSearch) {
+        const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&s=${title}&page=${testPage}`)
+        if (testSearch) {
             setData(response.data.Search)
-            console.log('yep')
+                console.log('yep')
             
         }
         else {
+            if (testPage === 1 && testSearch === false) {
+            setData(response.data.Search)
+            console.log('YEP')
+            
+            }
+            else {
             setData([...data, ...response.data.Search]);
+            console.log(data)
+            }
         }
         const totalResults = response.data.totalResults 
         setTotalPages(getTotalPages(totalResults, perPage))
@@ -47,11 +59,12 @@ const MoviesList = () => {
         if(observer.current) observer.current.disconnect()
         var callback = function(entries, observer) {
             if(entries[0].isIntersecting && page < totalPages){
+                
                 console.log(page)
                 setPage(page + 1)
             
-            setNewSearch(false)
-            fetchMovies(page)
+            testSearch = false;
+            fetchMovies(page, testSearch)
             }
         };
         observer.current = new IntersectionObserver(callback);
@@ -63,10 +76,11 @@ const MoviesList = () => {
     //     fetchMovies(page)
     // }
     const newFetch = () => {
+        testSearch = true;
         setPage(1)
-        setNewSearch(true)
-        console.log(newSearch)
-        fetchMovies(page)
+        
+        
+        fetchMovies(page, testSearch)
         
     }
     
