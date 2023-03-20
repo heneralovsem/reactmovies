@@ -11,17 +11,19 @@ const MoviesList = () => {
     const [page, setPage] = useState(1)
     const [checkSearch, setCheckSearch] = useState('search');
     const perPage = 10;
+    let titleValue;
     let newSearch;
     let pageValue;
     let pagesArr = getPagesArr(totalPages)
     const lastElement = useRef()
     const observer = useRef();
+    
     const [fetchMovies, isLoading, error] = useFetching(async (pageValue, newSearch) => {
         
-       
+       console.log(titleValue)
         console.log(pageValue)
         if (title.length < 3) {
-            const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&t=${title}`)
+            const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&t=${titleValue}`)
             setData(response.data)
             console.log(response.data)
             setCheckSearch('title')
@@ -29,7 +31,7 @@ const MoviesList = () => {
             
         }
         else {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&s=${title}&page=${pageValue}`)
+        const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&s=${titleValue}&page=${pageValue}`)
         if (newSearch) {
             setData(response.data.Search)
                 console.log('yep')
@@ -59,9 +61,9 @@ const MoviesList = () => {
         if(observer.current) observer.current.disconnect()
         var callback = function(entries, observer) {
             if(entries[0].isIntersecting && page < totalPages){
-                
-                console.log(page)
-                setPage(page + 1)
+            titleValue = localStorage.getItem('inputValue')
+            console.log(page)
+            setPage(page + 1)
             pageValue = page;
             newSearch = false;
             fetchMovies(pageValue, newSearch)
@@ -76,8 +78,9 @@ const MoviesList = () => {
     //     fetchMovies(page)
     // }
     const newFetch = () => {
+        localStorage.setItem('inputValue', `${title}`)
+        titleValue  = title;
         newSearch = true;
-        
         setPage(1)
         pageValue = 1;
         fetchMovies(pageValue, newSearch)
