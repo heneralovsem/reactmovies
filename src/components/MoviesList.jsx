@@ -5,15 +5,16 @@ import { getPagesArr, getTotalPages } from "./pagination/pages";
 import Loader from "./Loader/Loader";
 import { useFetching } from "../hooks/useFetching";
 const MoviesList = () => {
+    let titleValue;
+    let newSearch;
+    let pageValue;
     const [data, setData] = useState([])
     const [title, setTitle] = useState('')
     const [totalPages, setTotalPages] = useState(0) 
     const [page, setPage] = useState(1)
     const [checkSearch, setCheckSearch] = useState('search');
     const perPage = 10;
-    let titleValue;
-    let newSearch;
-    let pageValue;
+    
     let pagesArr = getPagesArr(totalPages)
     const lastElement = useRef()
     const observer = useRef();
@@ -22,7 +23,7 @@ const MoviesList = () => {
         
        console.log(titleValue)
         console.log(pageValue)
-        if (title.length < 3) {
+        if (titleValue.length < 3) {
             const response = await axios.get(`http://www.omdbapi.com/?apikey=e06d9c6d&t=${titleValue}`)
             setData(response.data)
             console.log(response.data)
@@ -52,10 +53,17 @@ const MoviesList = () => {
         setTotalPages(getTotalPages(totalResults, perPage))
       //  {pagesArr.map((p => <button onClick={() => changePage(p)} className={page === p ? 'pagebtn pagebtn__active' : 'pagebtn'} key={p}>{p}</button> ))}
         console.log(response.data)
+        
         setCheckSearch('search')
         
         }
     })
+    useEffect(() => {
+        titleValue = localStorage.getItem('inputValue')
+        setTitle(titleValue)
+        fetchMovies(pageValue);
+        
+    },[])
     useEffect(() => {
         if(isLoading) return;
         if(observer.current) observer.current.disconnect()
@@ -87,7 +95,7 @@ const MoviesList = () => {
         
     }
     
-    
+
     return (
         <div>
             <div className="search">
