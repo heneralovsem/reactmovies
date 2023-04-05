@@ -1,17 +1,18 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context";
+import { Context } from "../../context";
 import Button from '@mui/material/Button'
 import cl from './Navbar.module.css'
+import { observer } from "mobx-react-lite";
 
-const Navbar = () => {
-    const {isAuth, setIsAuth} = useContext(AuthContext)
+const Navbar = observer (() => {
+    const {user} = useContext(Context)
     const [openBurger, setOpenBurger] = useState(false)
-    let navUser = localStorage.getItem('name')
+    
     const logout = () => {
-        setIsAuth(false);
-        localStorage.removeItem('auth')
-        localStorage.removeItem('name')
+        localStorage.removeItem('token')
+        user.setUser({})
+        user.setIsAuth(false)
       }
     const openNav = () => {
         setOpenBurger(!openBurger)
@@ -36,8 +37,8 @@ const Navbar = () => {
         </div>
         
         <div className={cl.auth__links}>
-        {isAuth ? <span className={cl.username}>{navUser}</span> : null }
-        {!isAuth ? <Button variant="outlined"><Link className={cl.button__link} to="/login">Log in</Link></Button> : <Button variant="outlined" onClick={logout}>Log out</Button> }
+        
+        {!user.isAuth ? <Button variant="outlined"><Link className={cl.button__link} to="/login">Log in</Link></Button> : <Button variant="outlined" onClick={logout}>Log out</Button> }
       
         </div>
         
@@ -45,6 +46,6 @@ const Navbar = () => {
     </div>
         </div>
     );
-};
+});
 
 export default Navbar;
