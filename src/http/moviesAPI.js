@@ -17,3 +17,19 @@ export const fetchWatchedMovies =  async (userId) => {
     const {data} = await $host.get(`api/user/watched?userId=${userId}`) 
     return data
 }
+export const updateRating = async (watchedMovie) => {
+    const {data} = await $host.put('api/user/rating/' + watchedMovie.id, watchedMovie)
+    return data
+}
+export const createComment = async (comment) => {
+    const {data} = await $host.post('api/comments', comment)
+    return data
+}
+export const fetchComments = async (imdbId) => {
+    const {data} = await $host.get(`api/comments?imdbId=${imdbId}`)
+    return data
+}
+export const updateComment = async (comment) => {
+    const {data} = await $host.put('api/comments/' + comment.id, comment)
+    return data
+}

@@ -20,6 +20,7 @@ const App = observer (() => {
             user.setUser(true)
             user.setIsAuth(true)
             user.setUserId(data.id)
+            user.setUserName(data.email)
         }).finally(() => setLoading(false))
     }, [])
 

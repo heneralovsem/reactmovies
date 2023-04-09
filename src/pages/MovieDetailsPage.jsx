@@ -2,14 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
-import { createWatchLaterMovie, createWatchedMovie, fetchWatchLaterMovies, fetchWatchedMovies } from "../http/moviesAPI";
+import { createComment, createWatchLaterMovie, createWatchedMovie, fetchComments, fetchWatchLaterMovies, fetchWatchedMovies, updateComment } from "../http/moviesAPI";
 import { Context } from "../context";
+import CommentItem from "../components/CommentItem/CommentItem";
 
 const MovieDetailsPage = () => {
   const {user} = useContext(Context)
   const params = useParams();
   console.log(params);
   const [isWatched, setIsWatched] = useState(false)
+  const [myRating, setMyRating] = useState(0)
+  const [commentText, setCommentText] = useState('')
+  const [commentData, setCommentData] = useState([])
   const [isWatchLater, setIsWatchLater] = useState(false)
   const [movieData, setMovieData] = useState([]);
   async function fetchMovieData() {
@@ -28,6 +32,13 @@ const MovieDetailsPage = () => {
       
     })
   }
+  const addComment = () => {
+    createComment({text: commentText, author: user._userName, imdbId: params.id, userId: user._userId }).then(data => {
+    fetchComments(params.id).then(data => {
+      setCommentData(data)
+    })
+    })
+  }
   
   useEffect(() => {
     fetchMovieData();
@@ -35,6 +46,7 @@ const MovieDetailsPage = () => {
       data.forEach(element => {
         if (params.id === element.imdbId) { 
           setIsWatched(true)
+          setMyRating(element.rating)
         }
       });
     })
@@ -45,19 +57,22 @@ const MovieDetailsPage = () => {
         }
       });
     })
+     fetchComments(params.id).then(data => {
+       setCommentData(data)
+     })
     
   }, []); 
-  const myRating = () => {
-    
-    
-  }
+  
   
   console.log(movieData);
+  console.log(user._userName)
+  console.log(user._userId)
   return (
     <div>
-      <button onClick={myRating}>testrating</button>
+      
       {!isWatchLater ? <button onClick={addWatchLater}> Add to watch later</button> : <p>You've already added this movie to watch later list</p> }
      {!isWatched ? <button onClick={addWatched}> Mark as watched</button> : <p>You've already marked this movie as watched</p>} 
+     {myRating > 0 ? <p>{myRating}</p> : <p>You didn't rate this movie</p>}
       <MovieDetails
         postersrc={movieData.Poster}
         plot={movieData.Plot}
@@ -71,6 +86,11 @@ const MovieDetailsPage = () => {
         year={movieData.Year}
         imdbRating={movieData.imdbRating}
       />
+      <div><input type="text" value={commentText} onChange={(event) => setCommentText(event.target.value)}
+          placeholder="Comment..." />
+      <button onClick={addComment}> Comment</button>
+      {commentData.map(comment => (<CommentItem key={comment.id} text={comment.text} imdbId={comment.imdbId} userId={comment.userId} author={comment.author} id={comment.id}/>))}</div>
+      
       </div>
   );
 };

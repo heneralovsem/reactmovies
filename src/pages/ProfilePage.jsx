@@ -10,7 +10,7 @@ import { $host } from "../http";
 const ProfilePage = observer(() => {
     const [data, setData] = useState([])
     const {user} = useContext(Context)
-    const {movie} = useContext(Context)
+    
     let userName = localStorage.getItem('name')
     console.log(user._userId)
     // const fetchWatchLaterMovies =  async () => {
@@ -22,17 +22,20 @@ const ProfilePage = observer(() => {
     useEffect(() => {
         fetchWatchLaterMovies(user._userId).then(data => {
             setData(data)
+            
         })
         
     }, [])
     const fetchWatched = () => {
         fetchWatchedMovies(user._userId).then(data => {
         setData(data)
+        console.log(data)
         })
       }
       const fetchWatchLater = () => {
         fetchWatchLaterMovies(user._userId).then(data => {
         setData(data)
+        console.log(data)
         })
       }
       
@@ -43,7 +46,7 @@ const ProfilePage = observer(() => {
             <button onClick={fetchWatchLater}>Watch later</button>
             <button onClick={fetchWatched}>Watched</button>
             </div>
-            {data.map(watchLaterMovie => (<WatchLaterItem key={watchLaterMovie.id} name={watchLaterMovie.name} postersrc={watchLaterMovie.postersrc} imdbId={watchLaterMovie.imdbId}/>) )}
+            {data.map(watchLaterMovie => (<WatchLaterItem key={watchLaterMovie.id} name={watchLaterMovie.name} postersrc={watchLaterMovie.postersrc} imdbId={watchLaterMovie.imdbId}  rating={watchLaterMovie.rating} id={watchLaterMovie.id}/>) )}
         </div>
     );
 });

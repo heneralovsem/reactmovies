@@ -10,6 +10,7 @@ export const privateRoutes = [
     {path: '/', component: <Navigate to= "movies" replace/> },
     {path: '/movies/:id', component: <MovieDetailsPage/>},
     {path: '/login', component: <Navigate to="/movies" replace/>},
+    {path: '/registration', component: <Navigate to="/movies" replace/>},
     {path: '/profile', component: <ProfilePage/> },
 
     
@@ -20,6 +21,7 @@ export const publicRoutes = [
     {path: '/', component: <Navigate to= "movies" replace/> },
     {path: '/movies/:id', component: <MovieDetailsPage/>},
     {path: '/profile', component: <Navigate to ="/login" replace/> },
+    {path: '/registration', component: <LoginPage/>},
     {path: '/login', component: <LoginPage/>},
     
 

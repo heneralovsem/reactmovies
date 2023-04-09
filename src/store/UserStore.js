@@ -3,6 +3,7 @@ export default class UserStore {
     constructor() {
         this._isAuth = false;
         this._userId = 0;
+        this._userName = ''
         this._user = {}
         makeAutoObservable(this)
     }
@@ -15,6 +16,9 @@ export default class UserStore {
     }
     setUserId(userId) {
         this._userId = userId;
+    }
+    setUserName(userName) {
+        this._userName = userName
     }
     
     get isAuth() {
