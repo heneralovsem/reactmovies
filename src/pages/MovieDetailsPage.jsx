@@ -4,7 +4,9 @@ import axios from "axios";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 import { createComment, createWatchLaterMovie, createWatchedMovie, fetchComments, fetchWatchLaterMovies, fetchWatchedMovies, updateComment } from "../http/moviesAPI";
 import { Context } from "../context";
+import { useFetching } from "../hooks/useFetching";
 import CommentItem from "../components/CommentItem/CommentItem";
+import Loader from "../components/Loader/Loader";
 
 const MovieDetailsPage = () => {
   const {user} = useContext(Context)
@@ -16,12 +18,12 @@ const MovieDetailsPage = () => {
   const [commentData, setCommentData] = useState([])
   const [isWatchLater, setIsWatchLater] = useState(false)
   const [movieData, setMovieData] = useState([]);
-  async function fetchMovieData() {
+  const [fetchMovieData, isLoading, error] = useFetching(async () => {
     const response = await axios.get(
       `http://www.omdbapi.com/?apikey=e06d9c6d&r=json&i=${params.id}&plot=full`
     );
     setMovieData(response.data);
-  }
+  })
   const addWatchLater = () => {
     createWatchLaterMovie({name: movieData.Title, postersrc: movieData.Poster, imdbId: movieData.imdbID, userId: user._userId }).then(data => {
       
@@ -67,6 +69,9 @@ const MovieDetailsPage = () => {
   console.log(movieData);
   console.log(user._userName)
   console.log(user._userId)
+  if (isLoading) {
+    return <Loader/>
+  }
   return (
     <div>
       

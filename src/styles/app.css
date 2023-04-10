@@ -13,3 +13,8 @@
 .pagebtn__active {
     border: 2px solid burlywood;
 }
+.login_wrapper {
+    width: 600px;
+    padding-top: 100px;
+    margin: 0 auto;
+}

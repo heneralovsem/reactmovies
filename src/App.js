@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import './styles/app.css'
-import MoviesList from "./components/MoviesList";
+import MoviesList from "./components/MoviesList/MoviesList";
 import { BrowserRouter } from "react-router-dom";
 import { Context } from "./context";
 import AppRouter from "./components/AppRouter";

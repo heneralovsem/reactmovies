@@ -43,7 +43,7 @@ const LoginPage = observer (() => {
     
   };
   return (
-    <div>
+    <div className="login_wrapper">
       
         <TextField
           sx={{width: '100%'}}
@@ -66,7 +66,7 @@ const LoginPage = observer (() => {
           required
         />
         
-      {isLogin? <div>Don't have an account? <Link to="/registration">Create an account</Link> <button className="login-button" onClick={logIn}>Log in</button> </div> : <div>Already have an account? <Link to="/login">Log in</Link> <button onClick={signIn}>Register</button> </div>}
+      {isLogin? <div>Don't have an account? <Link to="/registration">Create an account</Link> <button className="login-button" onClick={logIn}>Log in</button> </div> : <div>Already have an account? <Link to="/login">Log in</Link> <button onClick={signIn}>Create</button> </div>}
       
     </div>
   );
