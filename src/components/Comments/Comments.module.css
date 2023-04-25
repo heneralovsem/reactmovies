@@ -1,0 +1,14 @@
+.comments__wrapper {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    /* padding-left: 20px;
+    padding-bottom: 100px; */
+    padding: 0px 20px 100px 20px;
+    
+}
+.comments__button {
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 10px;
+}

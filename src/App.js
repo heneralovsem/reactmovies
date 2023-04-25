@@ -30,11 +30,13 @@ const App = observer (() => {
 
   
   return (
-    
-    <BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
       <Navbar/>
       <AppRouter/>
     </BrowserRouter>
+    </div>
+    
     
   );
 })

@@ -4,7 +4,7 @@ import MoviesList from "../components/MoviesList/MoviesList";
 function MoviesPage() {
   
   return (
-    <div>
+    <div className="movies__wrapper">
       <MoviesList/>
     </div>
   );

@@ -1,0 +1,38 @@
+.profile__button__active {
+    width: 50%;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #1976d2;
+    background: transparent;
+    border: none;
+    padding-bottom: 5px;
+    letter-spacing: 0.03em;
+    border-bottom: 1px solid rgba(25, 118, 210, 0.5);
+    cursor: pointer;
+}
+.profile__wrapper {
+    padding-top: 100px;
+    padding-bottom: 100px;
+     
+    
+}
+.profile__button {
+    background: transparent;
+    border: none;
+    color: #1976d2;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 0.03em;
+    width: 50%;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+.profile__list__type {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: row;
+    
+}

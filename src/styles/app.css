@@ -2,7 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
+body {
+    background-color: #e6ebee;
+}
+ 
+
 .search {
     padding-bottom: 40px;
 }
@@ -13,8 +19,9 @@
 .pagebtn__active {
     border: 2px solid burlywood;
 }
-.login_wrapper {
-    width: 600px;
-    padding-top: 100px;
-    margin: 0 auto;
-}
+ /* .movies__wrapper {
+    background-color: #e9ebee;
+} */
+.movie__details__wrapper {
+    padding: 100px 0px;
+} 

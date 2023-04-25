@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import cl from './MoviesListItem.module.css'
+import { Button } from "@mui/material";
 const MoviesListItem = (props) => {
     const navigate = useNavigate()
     const getId = () => {
@@ -13,12 +14,12 @@ const MoviesListItem = (props) => {
             </div>
             <div className={cl.item__details}>
             <div className={cl.item__info}>
-            <p>{props.title}</p>
+            <h3 className={cl.item__name}>{props.title}</h3>
             <p>{props.type}</p>
             <p>{props.year}</p>
             </div>
             <div className={cl.item__button__wrapper}>
-            <button onClick={getId} className={cl.item__button}>Details</button>
+            <Button variant="outlined" onClick={getId} className={cl.item__button}>Details</Button>
             </div>
             </div>
         </div>

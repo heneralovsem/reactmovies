@@ -1,0 +1,41 @@
+.login_wrapper {
+    
+    display: flex;
+    padding-top: 100px;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+.login_form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 600px;
+    border: 0.5px solid #D9DDDC;
+    border-radius: 5px;
+    padding: 100px 50px;
+}
+.login_text {
+    
+}
+.form_header {
+   text-align: center;
+}
+.login_bottom_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.login__link {
+    text-decoration: none;
+    color: blue;
+}
+.login__button {
+    width: 100px;
+    padding: 8px 0px;
+    background: transparent;
+    border: 2px solid green;
+    color: green;
+    font-size: 16px;
+    
+}
