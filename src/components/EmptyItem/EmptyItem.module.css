@@ -1,0 +1,14 @@
+.item__wrapper {
+    width: 60%;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    padding: 80px 0px;
+    border: 2px solid #D9DDDC;
+    border-radius: 10px;
+}
+.item__text {
+    text-align: center;
+    padding-top: 100px;
+    font-size: 24px;
+}

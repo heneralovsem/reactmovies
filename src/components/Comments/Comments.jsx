@@ -43,7 +43,7 @@ const Comments = observer((props) => {
       <div className={cl.comments__wrapper}><TextField variant="standard" fullWidth value={commentText} onChange={(event) => setCommentText(event.target.value)}
           placeholder="Comment..." />
          <div className={cl.comments__button}>
-          <Button variant="outlined" endIcon={<SendIcon />} onClick={addComment}>Send</Button>
+          <Button disabled = {!user._isAuth} variant="outlined" endIcon={<SendIcon />} onClick={addComment}>Send</Button>
           </div> 
       {movie._comments.slice().sort((a,b) => b.id - a.id).map(comment => (<CommentItem key={comment.id} text={comment.text} imdbId={comment.imdbId} userId={comment.userId} author={comment.author} id={comment.id}/>))}</div>
       

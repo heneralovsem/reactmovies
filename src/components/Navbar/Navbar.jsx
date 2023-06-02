@@ -13,6 +13,7 @@ const Navbar = observer (() => {
         localStorage.removeItem('token')
         user.setUser({})
         user.setIsAuth(false)
+        window.location.reload(false)
       }
     const openNav = () => {
         setOpenBurger(!openBurger)

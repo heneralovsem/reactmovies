@@ -76,7 +76,6 @@ const MovieDetails = observer((props) => {
             setIsWatched(true);
             setMyRating(element.rating);
             setWatchedId(element.id);
-            console.log(watchedId);
          }
        });
     });
@@ -85,24 +84,36 @@ const MovieDetails = observer((props) => {
     <div className={cl.details__wrapper}>
       <div className={cl.details__info}>
         <div className={cl.details__image__wrapper}>
-          <img className={cl.details__image} src={props.postersrc} alt="N/A" />
+         {props.postersrc === 'N/A' ? <img className={cl.details__image} src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png' alt="poster" /> : <img className={cl.details__image} src={props.postersrc} alt="poster" />} 
         </div>
         <div className={cl.details__title__wrapper}></div>
         <div className={cl.details__description}>
           <h1 className={cl.details__title}>{props.title}</h1>
           <div className={cl.details__rating__wrapper}>
+            <div className={cl.details__rating}>
             <Icon className={cl.details__icon} path={mdiStar}></Icon>
-            <p className={cl.details__rating}>{props.imdbRating}</p>
-            {myRating > 0 ? <p>{myRating}</p> : <p>You didn't rate this movie</p>}
+            <span>{props.imdbRating}</span></div>
+            <p>You rated</p> {myRating > 0 ? <div className={cl.details__my__rating}><Icon className={cl.details__icon} path={mdiStar}></Icon><span>{myRating}</span> </div> : <span>N/A</span>}
           </div>
-
+          <div className={cl.description__flex__wrapper}>
+          <div className={cl.description__flex}>
           <p>Actors: </p>
-          <p>Genre:{props.genres}</p>
-          <p>Type:{props.type}</p>
-          <p>Year:{props.year}</p>
-          <p>Seasons: {props.totalSeasons}</p>
-          <p>Runtime: {props.runtime}</p>
-          <div><p>{props.actors}</p></div>
+          <p>Genre:</p>
+          <p>Type:</p>
+          <p>Year:</p>
+          {props.type === 'series' ?  <p>Seasons:</p> : null  }
+          <p>Runtime: </p>
+          </div>
+          <div className={cl.description__flex}>
+          <p>{props.actors}</p>
+          <p>{props.genres}</p>
+          <p>{props.type}</p>
+          <p>{props.year}</p>
+          {props.type === 'series' ?  <p>{props.totalSeasons}</p> : null}
+          <p>{props.runtime}</p>
+          </div>
+          </div>
+         
         </div>
       </div>
       <div className={cl.details__buttons}>
@@ -110,6 +121,7 @@ const MovieDetails = observer((props) => {
             <Button
               variant="outlined"
               color="success"
+              disabled = {!user._isAuth}
               endIcon={<AddIcon />}
               onClick={addWatchLater}
             >
@@ -131,6 +143,7 @@ const MovieDetails = observer((props) => {
           <Button
             variant="outlined"
             color="success"
+            disabled = {!user._isAuth}
             endIcon={<AddIcon />}
             onClick={addWatched}
           >

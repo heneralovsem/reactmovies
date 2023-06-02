@@ -3,6 +3,11 @@ import cl from './CommentItem.module.css'
 import { Context } from "../../context";
 import { deleteComment, updateComment } from "../../http/moviesAPI";
 import { Modal } from "@mui/material";
+import { Button } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import { TextField } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete";
+import CheckIcon from "@mui/icons-material/Check";
 import { observer } from "mobx-react-lite";
 const CommentItem = observer((props) => {
     const [edit, setEdit] = useState(false)
@@ -36,10 +41,11 @@ const CommentItem = observer((props) => {
             <div className={cl.comment__info}>
             <h2 className={cl.comment__author}>{props.author}</h2>
             <p>{props.text}</p>
-            {user._userId === props.userId? <div><button className={cl.comment__button} onClick={editComment}>Edit</button> <button onClick={deleteMovieComment}>Delete</button></div> : null}
+            {user._userId === props.userId? <div><Button variant="outlined" color="success" size="small" endIcon={<EditIcon />} className={cl.comment__button} onClick={editComment}>Edit</Button> <Button variant="outlined" color="error" size="small" endIcon={<DeleteIcon />} onClick={deleteMovieComment}>Delete</Button></div> : null}
             <Modal open={edit} onClose={closeModal}>
                 <div className={cl.comment__modal}>
-                <div> <input type="text" value={editedValue} onChange={(event) => setEditedValue(event.target.value)} /> <button onClick={updateEditedComment}> Save</button> </div>
+                <div> <TextField multiline maxRows={4} value={editedValue} className={cl.modal__text} onChange={(event) => setEditedValue(event.target.value)} ></TextField> </div>
+                <div><Button className={cl.modal__btn} variant="outlined" endIcon={<CheckIcon />} onClick={updateEditedComment}> Save</Button></div>
                 </div>
             </Modal>
             

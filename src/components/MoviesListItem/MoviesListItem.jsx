@@ -10,7 +10,7 @@ const MoviesListItem = (props) => {
     return (
         <div className={cl.item__wrapper}>
             <div className={cl.item__image__wrapper}>
-                <img className={cl.item__image} src={props.postersrc} alt="N/A" />
+                {props.postersrc === 'N/A' ? <img className={cl.item__image} src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png' alt="poster" /> : <img className={cl.item__image} src={props.postersrc} alt="poster" />}
             </div>
             <div className={cl.item__details}>
             <div className={cl.item__info}>

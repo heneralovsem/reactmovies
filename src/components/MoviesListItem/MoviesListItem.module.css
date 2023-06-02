@@ -40,3 +40,43 @@
    width: 100px;
     
 }
+@media screen and (max-width:768px) {
+    .item__details {
+        font-size: 14px;
+    }
+    .item__button {
+        width: 80px;
+    }
+    .item__image {
+        width: 150px;
+        height: 200px;
+    }
+    .item__image__wrapper {
+        width: 150px;
+        height: 200px;
+    }
+    .item__wrapper {
+        gap: 30px;
+    }
+    
+  }
+  @media screen and (max-width:425px) {
+    .item__details {
+        font-size: 12px;
+    }
+    .item__button {
+        width: 80px;
+    }
+    .item__image {
+        width: 120px;
+        height: 180px;
+    }
+    .item__image__wrapper {
+        width: 120px;
+        height: 180px;
+    }
+    .item__wrapper {
+        gap: 20px;
+    }
+    
+  }

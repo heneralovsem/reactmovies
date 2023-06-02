@@ -6,6 +6,7 @@ import WatchLaterItem from "../WatchLaterItem/WatchLaterItem";
 import WatchedItem from "../WatchedItem/WatchedItem";
 import cl from "./Profile.module.css"
 import { Button } from "@mui/material";
+import EmptyListItem from "../EmptyListItem/EmptyListItem";
 
 
 
@@ -19,11 +20,22 @@ const Profile = observer(() => {
     console.log(user._userId)
     
     useEffect(() => {
+        if (movie._selectedType === 'watched') {
+        movie.setWatchLater([])
+        fetchWatchedMovies(user._userId).then(data => {
+        movie.setWatched(data)
+        console.log(data)
+        movie.setSelectedType('watched')
+        })
+        }
+        else {
         fetchWatchLaterMovies(user._userId).then(data => {
             movie.setWatched([])
             movie.setWatchLater(data)
+            movie.setSelectedType('watchlater')
             
         })
+    }
         
     }, [])
     const fetchWatched = () => {
@@ -31,6 +43,7 @@ const Profile = observer(() => {
         fetchWatchedMovies(user._userId).then(data => {
         movie.setWatched(data)
         console.log(data)
+        movie.setSelectedType('watched')
         })
       }
       const fetchWatchLater = () => {
@@ -38,15 +51,17 @@ const Profile = observer(() => {
         fetchWatchLaterMovies(user._userId).then(data => {
         movie.setWatchLater(data)
         console.log(data)
+        movie.setSelectedType('watchlater')
         })
       }
       
     return (
         <div className={cl.profile__wrapper}>
             <div className={cl.profile__list__type}> 
-            <button className={movie._watchLaterMovies.length > 0 ? `${cl.profile__button__active}` : `${cl.profile__button}`} onClick={fetchWatchLater}>Watch later</button>
-            <button className={movie._watchedMovies.length > 0 ? `${cl.profile__button__active}` : `${cl.profile__button}`} onClick={fetchWatched}>Watched</button>
+            <button className={movie._selectedType === 'watchlater' ? `${cl.profile__button__active}` : `${cl.profile__button}`} onClick={fetchWatchLater}>Watch later</button>
+            <button className={movie._selectedType === 'watched' ? `${cl.profile__button__active}` : `${cl.profile__button}`} onClick={fetchWatched}>Watched</button>
             </div>
+            {movie._selectedType === 'watchlater' && movie._watchLaterMovies.length === 0 ? <EmptyListItem/> : null}
             {movie._watchLaterMovies.slice().sort((a,b) => b.id - a.id).map(watchLaterMovie => (<WatchLaterItem key={watchLaterMovie.id} name={watchLaterMovie.name} postersrc={watchLaterMovie.postersrc} imdbId={watchLaterMovie.imdbId}  rating={watchLaterMovie.rating} id={watchLaterMovie.id} type={watchLaterMovie.type}/>) )}
             {movie._watchedMovies.slice().sort((a,b) => b.id - a.id).map(watchedMovie => (<WatchedItem key={watchedMovie.id} name={watchedMovie.name} postersrc={watchedMovie.postersrc} imdbId={watchedMovie.imdbId}  rating={watchedMovie.rating} id={watchedMovie.id} type={watchedMovie.type}/>) )}
         </div>

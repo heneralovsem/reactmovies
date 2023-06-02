@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
-import { createComment, createWatchLaterMovie, createWatchedMovie, fetchComments, fetchWatchLaterMovies, fetchWatchedMovies, updateComment } from "../http/moviesAPI";
 import { Context } from "../context";
 import { useFetching } from "../hooks/useFetching";
 import Loader from "../components/Loader/Loader";

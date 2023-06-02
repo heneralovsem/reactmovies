@@ -44,6 +44,13 @@
    width: 100px;
     
 }
+.item__rating {
+    display: flex;
+    align-items: center;
+}
+.item__icon {
+    color: gold;
+}
 .modal__container {
     border: 1px solid black;
     background: whitesmoke;
@@ -60,13 +67,12 @@
     text-align: center;
 }
 .modal__button {
-    width: 100px;
+    width: 200px;
     margin: 0 auto;
-    padding: 8px;
-    background: transparent;
-    border: 0.5px solid black;
-    cursor: pointer;
 }
 .rating__wrapper {
     margin: 0 auto;
+}
+.modal__movie {
+    color: #1976d2;
 }

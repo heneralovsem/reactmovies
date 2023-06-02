@@ -6,9 +6,13 @@ export default class MoviesStore {
         this._watchLaterMovies = []
         this._watchedMovies = []
         this._comments = []
+        this._selectedType = ''
         makeAutoObservable(this)
     }
-
+    setSelectedType(type) {
+        this._selectedType = type
+    }
+    
     setWatchLater(watchLaterMovies) {
         this._watchLaterMovies = watchLaterMovies
     }

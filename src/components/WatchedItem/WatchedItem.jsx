@@ -6,13 +6,16 @@ import { Modal, Rating, Button } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../context";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Icon from "@mdi/react";
+import { mdiStar } from "@mdi/js";
+
 const WatchedItem = observer((props) => {
     const {movie} = useContext(Context)
     const navigate = useNavigate()
     const getId = () => {
         navigate(`/movies/${props.imdbId}`)
     }
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(props.rating)
     const rateMovie = () => {
         updateRating({rating: rating, id: props.id }).then(data => {
             movie.updateRating(data[1][0])
@@ -41,7 +44,7 @@ const WatchedItem = observer((props) => {
             <div className={cl.item__info}>
             <p>{props.name}</p>
             <p>{props.type}</p>
-            <p>{props.rating}</p>
+            <div className={cl.item__rating}><Icon size={1} className={cl.item__icon} path={mdiStar}></Icon> {props.rating}</div>
             <Button variant="outlined" onClick={getId}  className={cl.item__button}>Details</Button>
             </div>
             </div>
@@ -50,6 +53,7 @@ const WatchedItem = observer((props) => {
             <Button variant="outlined" color="error" endIcon={<DeleteIcon />} onClick={deleteMovie}>Delete</Button>
             <Modal open={modal} onClose={closeModal}>
                 <div className={cl.modal__container}>
+                <h2 className={cl.modal__movie}>{props.name}</h2>
                 <div className={cl.rating__wrapper}>
                 <Rating
                  name="simple-controlled"
@@ -58,7 +62,7 @@ const WatchedItem = observer((props) => {
                  value={+rating}
                  onChange={(event) => setRating(event.target.value)} />
                 </div>
-                <button className={cl.modal__button} onClick={rateMovie}>Rate</button>
+                <div><Button variant="outlined" className={cl.modal__button} onClick={rateMovie}>Rate</Button></div>
                 </div>
             
             </Modal>

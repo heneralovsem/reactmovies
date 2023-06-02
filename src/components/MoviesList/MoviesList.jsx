@@ -6,11 +6,16 @@ import Loader from "../Loader/Loader";
 import { useFetching } from "../../hooks/useFetching";
 import { TextField } from "@mui/material";
 import cl from './MoviesList.module.css'
+import EmptyItem from "../EmptyItem/EmptyItem";
+import Icon from "@mdi/react";
+import { mdiMagnify } from "@mdi/js";
+
 const MoviesList = () => {
   let titleValue;
   let newSearch;
   let pageValue;
   const [data, setData] = useState([]);
+  const [isSearching, setIsSearching] = useState(true)
   const [title, setTitle] = useState("");
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
@@ -25,6 +30,7 @@ const MoviesList = () => {
     async (pageValue, newSearch) => {
       console.log(titleValue);
       console.log(pageValue);
+      setIsSearching(true)
       if (titleValue.length < 3) {
         const response = await axios.get(
           `http://www.omdbapi.com/?apikey=e06d9c6d&t=${titleValue}`
@@ -37,6 +43,10 @@ const MoviesList = () => {
         const response = await axios.get(
           `http://www.omdbapi.com/?apikey=e06d9c6d&s=${titleValue}&page=${pageValue}`
         );
+        if (response.data.Error) {
+          setData(response.data)
+        }
+        else {
         if (newSearch) {
           setData(response.data.Search);
           console.log("yep");
@@ -49,19 +59,28 @@ const MoviesList = () => {
             console.log(data);
           }
         }
+        }
         const totalResults = response.data.totalResults;
         setTotalPages(getTotalPages(totalResults, perPage));
         //  {pagesArr.map((p => <button onClick={() => changePage(p)} className={page === p ? 'pagebtn pagebtn__active' : 'pagebtn'} key={p}>{p}</button> ))}
         console.log(response.data);
-
+        
         setCheckSearch("search");
+        
       }
     }
   );
   useEffect(() => {
+    if (localStorage.getItem("inputValue")) {
     titleValue = localStorage.getItem("inputValue");
     setTitle(titleValue);
     fetchMovies(pageValue);
+    }
+    else {
+      titleValue = "";
+      setIsSearching(false)
+    }
+    
   }, []);
   useEffect(() => {
     if (isLoading) return;
@@ -96,19 +115,22 @@ const MoviesList = () => {
   return (
     <div>
       <div className={cl.search_wrapper}>
+        <form>
         <TextField
-          sx={{ width: "60%" }}
+          sx={{width: '100%'}}
           size="small"
           id="filled-search"
           type="text"
+          placeholder="Search..."
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         ></TextField>
-
-        <button onClick={newFetch}>movies</button>
+        <button className={cl.search__btn} onClick={newFetch}><Icon className={cl.search__icon} path={mdiMagnify} size={1}/></button>
+        </form>
       </div>
-
-      {!error ? (
+      {!isSearching && !isLoading ? <EmptyItem/> : null}
+      {data.Error ? <p className={cl.error}>{data.Error}</p>: null}
+      {!data.Error ?  (
         <div>
           {checkSearch === "search" ? (
             <div>
