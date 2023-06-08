@@ -8,10 +8,11 @@
 .details__info {
     display: flex;
     gap: 20px;
-    font-size: 20px;
+    flex-direction: row;
+    font-size: 18px;
 }
 .details__title {
-    
+   
 }
 .details__image {
     width: 300px;
@@ -19,13 +20,13 @@
     
 }
 .details__image__wrapper {
-    
+    display: flex;
+    flex-direction: column;
 }
 
 .details__description {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding-bottom: 5px;
     
 }
@@ -48,6 +49,8 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    padding-top: 25px;
+    
     
     
     
@@ -62,6 +65,7 @@
     color: gold;
     font-size: 40px;
 } */
+
 .details__icon {
     width: 40px;
     color: gold;
@@ -77,7 +81,9 @@
 
 .description__flex__wrapper {
     display: flex;
-    gap: 150px;
+    gap: 100px;
+    padding-top: 25px;
+    
     
 }
 .description__flex {
@@ -85,25 +91,32 @@
     flex-direction: column;
     gap: 25px;
     
+    
+    
+    
+    
 }
+
 @media screen and (max-width:1024px) {
     .details__image {
         width: 250px;
         height: 300px;
         
+        
     }
+    
     .details__buttons {
     
         width: 250px;
         
     }
     .description__flex__wrapper {
-        display: flex;
         gap: 50px;
         
     }
     .details__info {
         font-size: 14px;
+        
     }
     .details__plot {
         font-size: 14px;
@@ -111,19 +124,51 @@
     
   }
 @media screen and (max-width:768px) {
+    .details__wrapper {
+        padding: 10px;
+    }
+    
     .details__image {
-        width: 200px;
-        height: 300px;
+        width:320px;
+        height: 480px;
+        
+    }
+    .details__image__wrapper {
+        margin: 0 auto;
+    }
+    .details__info {
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
         
     }
     .details__buttons {
-        width: 200px;
+        width: 320px;
         
     }
     .description__flex__wrapper {
-        display: flex;
-        gap: 10px;
+        gap: 5px;
         
     }
     
+    
   }
+  @media screen and (max-width:425px) {
+    .details__wrapper {
+        padding: 5px;
+    }
+    .details__image {
+        width: 240px;
+        height: 320px;
+        
+    }
+    
+    .details__buttons {
+        width: 240px;
+        
+    }   
+    
+    
+  }
+  
+  

@@ -12,3 +12,11 @@
     padding-top: 20px;
     padding-right: 10px;
 }
+@media screen and (max-width:768px) {
+    .comments__wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    
+  }

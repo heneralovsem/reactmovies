@@ -86,7 +86,7 @@ const MoviesList = () => {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
     var callback = function (entries, observer) {
-      if (entries[0].isIntersecting && page < totalPages) {
+      if (entries[0].isIntersecting && page <= totalPages && totalPages != 1) {
         titleValue = localStorage.getItem("inputValue");
         console.log(page);
         setPage(page + 1);

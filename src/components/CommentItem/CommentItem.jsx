@@ -36,12 +36,13 @@ const CommentItem = observer((props) => {
     return (
         <div className={cl.comment__wrapper}>
             <div className={cl.comment__img__wrapper}>
-            <img className={cl.comment__img} src="https://www.milton.edu/wp-content/uploads/2019/11/avatar-placeholder.jpg" alt="" />
+            <div><img className={cl.comment__img} src="https://www.milton.edu/wp-content/uploads/2019/11/avatar-placeholder.jpg" alt="" />
+            </div>
+            <h2 className={cl.comment__author}>{props.author}</h2>
             </div>
             <div className={cl.comment__info}>
-            <h2 className={cl.comment__author}>{props.author}</h2>
-            <p>{props.text}</p>
-            {user._userId === props.userId? <div><Button variant="outlined" color="success" size="small" endIcon={<EditIcon />} className={cl.comment__button} onClick={editComment}>Edit</Button> <Button variant="outlined" color="error" size="small" endIcon={<DeleteIcon />} onClick={deleteMovieComment}>Delete</Button></div> : null}
+            <p className={cl.comment__text}>{props.text}</p>
+            {user._userId === props.userId? <div className={cl.comment__buttons}><Button variant="outlined" color="success" size="small" endIcon={<EditIcon />} className={cl.comment__button} onClick={editComment}>Edit</Button> <Button className={cl.comment__button} variant="outlined" color="error" size="small" endIcon={<DeleteIcon />} onClick={deleteMovieComment}>Delete</Button></div> : null}
             <Modal open={edit} onClose={closeModal}>
                 <div className={cl.comment__modal}>
                 <div> <TextField multiline maxRows={4} value={editedValue} className={cl.modal__text} onChange={(event) => setEditedValue(event.target.value)} ></TextField> </div>

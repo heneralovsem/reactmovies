@@ -23,18 +23,17 @@ const WatchLaterItem = observer((props) => {
         <div className={cl.item__wrapper}>
             <div className={cl.item__details__wrapper}>
             <div className={cl.item__image__wrapper}>
-                <img className={cl.item__image} src={props.postersrc} alt="N/A" />
+            {props.postersrc === 'N/A' ? <img className={cl.item__image} src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png' alt="poster" /> : <img className={cl.item__image} src={props.postersrc} alt="poster" />}
             </div>
             
             <div className={cl.item__info}>
             <p>{props.name}</p>
             <p>{props.type}</p>
-            <Button variant="outlined" onClick={getId}  className={cl.item__button}>Details</Button>
-            </div>
-            </div>
             <div className={cl.item__buttons__wrapper}>
-            <Button variant="outlined" color="error" endIcon={<DeleteIcon />} onClick={deleteMovie}>Delete</Button>
-            
+            <Button variant="outlined" onClick={getId}  className={cl.item__button}>Details</Button>
+            <Button variant="outlined" color="error" endIcon={<DeleteIcon />} onClick={deleteMovie} className={cl.item__button}>Delete</Button>
+            </div>
+            </div>
             </div>
         </div>
     );

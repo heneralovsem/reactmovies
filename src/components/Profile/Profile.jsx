@@ -62,6 +62,7 @@ const Profile = observer(() => {
             <button className={movie._selectedType === 'watched' ? `${cl.profile__button__active}` : `${cl.profile__button}`} onClick={fetchWatched}>Watched</button>
             </div>
             {movie._selectedType === 'watchlater' && movie._watchLaterMovies.length === 0 ? <EmptyListItem/> : null}
+            {movie._selectedType === 'watched' && movie._watchedMovies.length === 0 ? <EmptyListItem/> : null}
             {movie._watchLaterMovies.slice().sort((a,b) => b.id - a.id).map(watchLaterMovie => (<WatchLaterItem key={watchLaterMovie.id} name={watchLaterMovie.name} postersrc={watchLaterMovie.postersrc} imdbId={watchLaterMovie.imdbId}  rating={watchLaterMovie.rating} id={watchLaterMovie.id} type={watchLaterMovie.type}/>) )}
             {movie._watchedMovies.slice().sort((a,b) => b.id - a.id).map(watchedMovie => (<WatchedItem key={watchedMovie.id} name={watchedMovie.name} postersrc={watchedMovie.postersrc} imdbId={watchedMovie.imdbId}  rating={watchedMovie.rating} id={watchedMovie.id} type={watchedMovie.type}/>) )}
         </div>

@@ -17,16 +17,17 @@ const Comments = observer((props) => {
   const [commentData, setCommentData] = useState([])
   
   const addComment = () => {
+    if (commentText.length > 0 && commentText.trim() != '') {
     createComment({text: commentText, author: user._userName, imdbId: props.movieId, userId: user._userId }).then(data => {
       console.log(data)
       movie.addComment(data)
       setCommentText('')
-      
-    // fetchComments(props.movieId).then(data => {
-    //   setCommentData(data)
-    // })
     })
   }
+  else {
+    alert('Comment must contain at least 1 character')
+  }
+}
   
   useEffect(() => {
     

@@ -39,18 +39,18 @@ const WatchedItem = observer((props) => {
         <div className={cl.item__wrapper}>
             <div className={cl.item__details__wrapper}>
                 <div className={cl.item__image__wrapper}>
-                <img className={cl.item__image} src={props.postersrc} alt="N/A" />
-            </div>
+                {props.postersrc === 'N/A' ? <img className={cl.item__image} src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png' alt="poster" /> : <img className={cl.item__image} src={props.postersrc} alt="poster" />}
+                </div>
             <div className={cl.item__info}>
-            <p>{props.name}</p>
+            <p className={cl.item__title}>{props.name}</p>
             <p>{props.type}</p>
-            <div className={cl.item__rating}><Icon size={1} className={cl.item__icon} path={mdiStar}></Icon> {props.rating}</div>
-            <Button variant="outlined" onClick={getId}  className={cl.item__button}>Details</Button>
-            </div>
-            </div>
+            <div className={cl.item__rating__wrapper}><Button className={cl.item__rating__button} size="small" variant="outlined" onClick={openModal}>Rate movie</Button><Icon size={1} className={cl.item__icon} path={mdiStar}></Icon>{props.rating > 0 ? <span className={cl.item__rating}>{props.rating}</span> : <span className={cl.item__rating}>N/A</span> }</div>
             <div className={cl.item__buttons__wrapper}>
-            <Button variant="outlined" onClick={openModal}>Rate movie</Button>
-            <Button variant="outlined" color="error" endIcon={<DeleteIcon />} onClick={deleteMovie}>Delete</Button>
+            <Button size="small" variant="outlined" onClick={getId}  className={cl.item__button}>Details</Button>
+            <Button size="small" variant="outlined" color="error" endIcon={<DeleteIcon />} className={cl.item__button} onClick={deleteMovie}>Delete</Button>
+            </div>
+            </div>
+            </div>
             <Modal open={modal} onClose={closeModal}>
                 <div className={cl.modal__container}>
                 <h2 className={cl.modal__movie}>{props.name}</h2>
@@ -68,7 +68,6 @@ const WatchedItem = observer((props) => {
             </Modal>
             
             
-            </div>
         </div>
     );
 });

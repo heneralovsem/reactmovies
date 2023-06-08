@@ -36,3 +36,16 @@
     flex-direction: row;
     
 }
+@media screen and (max-width:768px) {
+    .profile__list__type {
+        width: 90%;
+    }
+}
+@media screen and (max-width:425px) {
+    .profile__button {
+        font-size: 16px;
+    }
+    .profile__button__active {
+        font-size: 16px;
+    }
+}
