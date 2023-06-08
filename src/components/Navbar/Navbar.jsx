@@ -32,7 +32,7 @@ const Navbar = observer (() => {
         <span className={cl.bar}></span>
         {openBurger ? <div className={cl.burger__links}>
         <Link className={cl.menu__link} to="/about">About</Link>
-        <Link className={cl.menu__link} to="/weather">Weather</Link>
+        <Link className={cl.menu__link} to="/movies">Search movies</Link>
         <Link className={cl.menu__link} to="/profile">Profile</Link>
             </div> : null }
         </div>
