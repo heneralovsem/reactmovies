@@ -8,40 +8,26 @@ import Loader from "../components/Loader/Loader";
 import Comments from "../components/Comments/Comments";
 
 const MovieDetailsPage = () => {
-  const {user} = useContext(Context)
+  const { user } = useContext(Context);
   const params = useParams();
-  console.log(params);
-  
+
   const [movieData, setMovieData] = useState([]);
   const [fetchMovieData, isLoading, error] = useFetching(async () => {
     const response = await axios.get(
       `http://www.omdbapi.com/?apikey=e06d9c6d&r=json&i=${params.id}&plot=full`
     );
     setMovieData(response.data);
-  })
-  
-  
-  
+  });
+
   useEffect(() => {
     fetchMovieData();
-    
-     
-    
-  }, []); 
-  
-  
-  console.log(movieData);
-  console.log(user._userName)
-  console.log(user._userId)
+  }, []);
+
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
   return (
     <div className="movie__details__wrapper">
-      
-      
-      
-     
       <MovieDetails
         postersrc={movieData.Poster}
         plot={movieData.Plot}
@@ -56,9 +42,8 @@ const MovieDetailsPage = () => {
         imdbRating={movieData.imdbRating}
         imdbId={movieData.imdbID}
       />
-      <Comments movieId = {params.id}/>
-      
-      </div>
+      <Comments movieId={params.id} />
+    </div>
   );
 };
 

@@ -8,21 +8,6 @@
 form {
     position: relative;
 }
-.search__btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 50px;
-    height: 100%;
-    background: none;
-    border: none;
-    padding-top: 1px;
-    border-radius: 50%;
-    
-    
-    cursor: pointer;
-}
 .search__icon {
     color: grey;
     

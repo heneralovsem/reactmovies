@@ -31,7 +31,6 @@ const Login = observer(() => {
       let data;
       data = await login(email, password);
       user.setUser(user);
-      console.log(user);
       user.setIsAuth(true);
       user.setUserId(data.id);
       user.setUserName(data.email);
@@ -43,52 +42,64 @@ const Login = observer(() => {
   };
   return (
     <div className={cl.login_wrapper}>
-        <div className={cl.login_form}>
-           {isLogin ? <h2 className={cl.form_header}> Log in</h2> : <h2 className={cl.form_header}>Create an account</h2>}
+      <div className={cl.login_form}>
+        {isLogin ? (
+          <h2 className={cl.form_header}> Log in</h2>
+        ) : (
+          <h2 className={cl.form_header}>Create an account</h2>
+        )}
         <TextField
-        sx={{ width: "100%" }}
-        type="text"
-        value={email}
-        id="outlined-required"
-        label="Email"
-        placeholder="Email..."
-        onChange={(event) => setEmail(event.target.value)}
-        required
-      />
-      <TextField
-        sx={{ width: "100%" }}
-        id="outlined-password-input"
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        placeholder="Password..."
-        required
-      />
+          sx={{ width: "100%" }}
+          type="text"
+          value={email}
+          id="outlined-required"
+          label="Email"
+          placeholder="Email..."
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        <TextField
+          sx={{ width: "100%" }}
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Password..."
+          required
+        />
 
-      {isLogin ? (
-        <div className={cl.login_bottom_wrapper}><div className={cl.login_text}>
-        Don't have an account?{" "}
-        <Link className={cl.login__link} to="/registration">Create an account</Link>{" "}
-        </div>
-        <div><button className={cl.login__button} onClick={logIn}>
-          Login
-        </button></div>
-        {" "}
+        {isLogin ? (
+          <div className={cl.login_bottom_wrapper}>
+            <div className={cl.login_text}>
+              Don't have an account?{" "}
+              <Link className={cl.login__link} to="/registration">
+                Create an account
+              </Link>{" "}
+            </div>
+            <div>
+              <button className={cl.login__button} onClick={logIn}>
+                Login
+              </button>
+            </div>{" "}
+          </div>
+        ) : (
+          <div className={cl.login_bottom_wrapper}>
+            {" "}
+            <div className={cl.login_text}>
+              Already have an account?{" "}
+              <Link className={cl.login__link} to="/login">
+                Login
+              </Link>{" "}
+            </div>
+            <div>
+              <button className={cl.login__button} onClick={signIn}>
+                Create
+              </button>
+            </div>{" "}
+          </div>
+        )}
       </div>
-        
-      ) : (
-        <div className={cl.login_bottom_wrapper}> <div className={cl.login_text}>
-        Already have an account? <Link className={cl.login__link} to="/login">Login</Link>{" "}
-        </div>
-        <div>
-          <button className={cl.login__button} onClick={signIn}>Create</button>
-        </div>{" "}
-      </div>
-       
-      )}
-        </div>
-      
     </div>
   );
 });
