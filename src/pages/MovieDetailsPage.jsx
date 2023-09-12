@@ -14,7 +14,7 @@ const MovieDetailsPage = () => {
   const [movieData, setMovieData] = useState([]);
   const [fetchMovieData, isLoading, error] = useFetching(async () => {
     const response = await axios.get(
-      `http://www.omdbapi.com/?apikey=e06d9c6d&r=json&i=${params.id}&plot=full`
+      `https://www.omdbapi.com/?apikey=e06d9c6d&r=json&i=${params.id}&plot=full`
     );
     setMovieData(response.data);
   });

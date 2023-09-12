@@ -32,14 +32,14 @@ const MoviesList = () => {
       setIsSearching(true);
       if (titleValue.length < 3) {
         const response = await axios.get(
-          `http://www.omdbapi.com/?apikey=e06d9c6d&t=${titleValue}`
+          `https://www.omdbapi.com/?apikey=e06d9c6d&t=${titleValue}`
         );
         setData(response.data);
         setCheckSearch("title");
         setTotalPages(0);
       } else {
         const response = await axios.get(
-          `http://www.omdbapi.com/?apikey=e06d9c6d&s=${titleValue}&page=${pageValue}`
+          `https://www.omdbapi.com/?apikey=e06d9c6d&s=${titleValue}&page=${pageValue}`
         );
         if (response.data.Error) {
           setData(response.data);
