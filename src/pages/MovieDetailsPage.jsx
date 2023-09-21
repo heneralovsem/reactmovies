@@ -4,7 +4,7 @@ import axios from "axios";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 import { Context } from "../context";
 import { useFetching } from "../hooks/useFetching";
-import Loader from "../components/Loader/Loader";
+import MainLoader from "../components/MainLoader/MainLoader";
 import Comments from "../components/Comments/Comments";
 
 const MovieDetailsPage = () => {
@@ -24,7 +24,7 @@ const MovieDetailsPage = () => {
   }, []);
 
   if (isLoading) {
-    return <Loader />;
+    return <MainLoader />;
   }
   return (
     <div className="movie__details__wrapper">

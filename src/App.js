@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { observer } from "mobx-react-lite";
 import UserStore from "./store/UserStore";
 import Loader from "./components/Loader/Loader";
+import MainLoader from "./components/MainLoader/MainLoader";
 import { check } from "./http/userAPI";
 const App = observer (() => {
   
@@ -25,7 +26,7 @@ const App = observer (() => {
     }, [])
 
     if (loading) {
-        return <Loader/>
+        return <MainLoader/>
     }
 
   
